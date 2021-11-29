@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 
 import androidx.compose.material.MaterialTheme
@@ -25,20 +27,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import com.example.cvjavierr.ui.theme.CVjavierRTheme
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CVjavierRTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                Surface(color = MaterialTheme.colors.secondaryVariant,modifier=Modifier.size(750.dp)) {
+                    Column(modifier = Modifier.height(300.dp),
+                        verticalArrangement = Arrangement.Top,
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        ProfileCV()
+
+                       // Technology(data= listOf("android","kotlin","jetpack","android","kotlin","jetpack","android","kotlin","jetpack"))
+
+                    }
                 }
+
+
+            }
             }
         }
-    }
 }
+
 
 @Composable
 fun Greeting(name: String) {
@@ -49,31 +62,69 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     CVjavierRTheme {
-     Surface(color = MaterialTheme.colors.secondaryVariant) {
+     Surface(color = MaterialTheme.colors.secondaryVariant,modifier=Modifier.size(300.dp)) {
          Column(modifier = Modifier.height(300.dp),
              verticalArrangement = Arrangement.Top,
              horizontalAlignment = Alignment.CenterHorizontally) {
-
-             Surface(
-                 modifier = Modifier.padding(10.dp)
-             ) {
-                 Text("CV JavierR", fontSize = 30.sp , textAlign = TextAlign.Center)
-             }
-             Surface(modifier = Modifier
-                 .size(150.dp)
-                 .padding(5.dp)
-                 , shape = CircleShape,
-                 border = BorderStroke(0.5.dp, Color.Black),
-                 elevation = 4.dp,
-                 color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f)
-             ) {
-                 Image(painter = painterResource(id = R.drawable.perfil), contentDescription ="shorlak" ,
-                     modifier=Modifier.size(130.dp)
-                     , contentScale = ContentScale.Crop)
-             }
+             ProfileCV()
+             //Technology(data= listOf("android","kotlin","jetpack"))
          }
         }
 
 
     }
+}
+@Composable
+fun ProfileCV(){
+
+    Surface(
+        modifier = Modifier.padding(10.dp)
+    ) {
+        Text("CV JavierR", fontSize = 30.sp , textAlign = TextAlign.Center)
+    }
+    Surface(modifier = Modifier
+        .size(150.dp)
+        .padding(5.dp)
+        , shape = CircleShape,
+        border = BorderStroke(0.5.dp, Color.Black),
+        elevation = 4.dp,
+        color = MaterialTheme.colors.onSurface.copy(alpha = 0.5f)
+    ) {
+        Image(painter = painterResource(id = R.drawable.perfil), contentDescription ="shorlak" ,
+            modifier=Modifier.size(130.dp)
+            , contentScale = ContentScale.Crop)
+    }
+
+}
+@Composable
+fun Technology(data: List<String>){
+
+        LazyColumn(modifier=Modifier.size(width = 450.dp, height = 550.dp,),verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally){
+            items(data){
+                    item ->
+                var id1 =  R.drawable.perfil
+                Row(modifier=Modifier.padding(5.dp)) {
+                    Image(painter = painterResource(id = id1), contentDescription ="$item" ,
+                        modifier=Modifier.size(130.dp)
+                        , contentScale = ContentScale.Crop)
+                    Text("$item")
+                }
+
+            }
+        }
+
+
+}
+
+fun coroutines(){
+    runBlocking {
+        (1..1_000_000).forEach{
+            launch{
+
+                print("*")
+            }
+        }
+    }
+
 }
