@@ -29,7 +29,12 @@ import androidx.compose.ui.unit.sp
 import com.example.cvjavierr.ui.theme.CVjavierRTheme
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-
+val imageid= intArrayOf(
+    R.drawable.perfil,R.drawable.gwen
+)
+val tech = listOf(
+    "casco","gwen"
+)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +47,8 @@ class MainActivity : ComponentActivity() {
                         ProfileCV()
 
                        // Technology(data= listOf("android","kotlin","jetpack","android","kotlin","jetpack","android","kotlin","jetpack"))
-
+                        Technologylist(imageid[0],tech[0])
+                        Technologylist(imageid[1],tech[1])
                     }
                 }
 
@@ -67,7 +73,8 @@ fun DefaultPreview() {
              verticalArrangement = Arrangement.Top,
              horizontalAlignment = Alignment.CenterHorizontally) {
              ProfileCV()
-             //Technology(data= listOf("android","kotlin","jetpack"))
+             Technologylist(imageid[0],tech[0])
+             Technologylist(imageid[1],tech[1])
          }
         }
 
@@ -126,5 +133,24 @@ fun coroutines(){
             }
         }
     }
+
+}
+@Composable
+fun Technologylist(imagen: Int , tech : String){
+
+
+
+
+
+            Row(modifier=Modifier.padding(5.dp)) {
+                Image(painter = painterResource(id = imagen), contentDescription ="1234" ,
+                    modifier=Modifier.size(130.dp)
+                    , contentScale = ContentScale.Crop)
+                Text(tech)
+            }
+
+
+
+
 
 }
