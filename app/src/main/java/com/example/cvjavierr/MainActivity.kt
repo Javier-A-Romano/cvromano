@@ -47,8 +47,15 @@ class MainActivity : ComponentActivity() {
                         ProfileCV()
 
                        // Technology(data= listOf("android","kotlin","jetpack","android","kotlin","jetpack","android","kotlin","jetpack"))
-                        Technologylist(imageid[0],tech[0])
-                        Technologylist(imageid[1],tech[1])
+                      //  Technologylist(imageid[0],tech[0])
+
+                    LazyColumn(){
+                        items(ListOfSkills){
+                            Text(text = ListOfSkills[0].name)
+                            
+                        }
+                    }
+
                     }
                 }
 
@@ -74,7 +81,7 @@ fun DefaultPreview() {
 
              Column(){
                  Technologylist(imageid[0],tech[0])
-                 Technologylist(imageid[1],tech[1])
+
 
 
              }
@@ -152,7 +159,9 @@ fun Technologylist(imagen: Int , tech : String){
             .padding(5.dp)
             .size(350.dp, 150.dp)) {
             Image(painter = painterResource(id = imagen), contentDescription ="1234" ,
-                modifier=Modifier.size(130.dp)
+                modifier= Modifier
+                    .size(130.dp)
+                    .padding(12.dp)
                 , contentScale = ContentScale.Crop)
             Text(tech, fontSize = 28.sp, textAlign = TextAlign.Center)
         }
@@ -162,5 +171,6 @@ fun Technologylist(imagen: Int , tech : String){
 
 
 }
-
-
+val casco=Skills(name="Casco", ImageSkill = R.drawable.perfil)
+val ListOfSkills= listOf(casco)
+data class Skills(val name:String ,val ImageSkill:Int )
